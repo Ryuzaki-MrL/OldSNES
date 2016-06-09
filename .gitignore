@@ -1,0 +1,9 @@
+.idea
+CMakeLists.txt
+
+banner
+cia
+romfs
+output
+*.exe
+*.xml
