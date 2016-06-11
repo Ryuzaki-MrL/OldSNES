@@ -1,22 +1,22 @@
 # blargSNES Virtual Console Edition
 
 INSTRUCTIONS:
-- Put your SNES rom on the romfs folder.
-- Rename it rom.smc.
+- Create a folder for each game on the input folder (Earthbound, for example).
+- Put your SNES rom on this folder.
 - Run make.bat.
-- Type in the game's title, publisher, product code (whatever you want) and unique id (whatever you want from 000000 to ffffff).
+- Type in the game's title, publisher, product code (SNS-P-SMWP, for example) and unique id (whatever you want from 000000 to ffffff).
 - Install the generated CIA file.
 - Enjoy.
 
 MAKING CUSTOM BANNER AND ICON (OPTIONAL):
-- Put a screenshot of the game on the input folder.
-- Rename it banner.png.
-- Put a box art or cartridge label image of the game on the input folder.
-- Rename it label.png.
+- Put a screenshot of the game on the folder you created for the game, and rename it banner.png.
+- OPTIONAL: Put a box art or cartridge label image of the game on the input folder, and rename it label.png.
 - Run banner.bat.
 - Type in the game's title and release year.
-- OPTIONAL: set the banner text's font size, number of lines and spacing: Leave it blank to use default values.
-- Navigate to the tools folder and start Ohana3DS.exe.
+- OPTIONAL: Type in the virtual console's title (the title that will be appear on the banner).
+- OPTIONAL: Set the banner text's font size, number of lines and spacing. Leave it blank to use default values.
+- OPTIONAL: Select a region for your banner. Leave it blank if you're going to use two or more.
+- Open Ohana3DS when prompted.
 - Select the Textures tab then click Open.
 - Navigate to the banner folder and select banner0.bcmdl.
 - Select COMMON1 and click Import.
@@ -40,22 +40,25 @@ MAKING CUSTOM BANNER AND ICON (OPTIONAL):
 - Select the first file and click Import.
 - Navigate to the output folder and select USA_EN2.png.
 - Select the next file and click Import.
-- Select EUR_EN3.png or USA_EN3.png, depending on your 3DS's region.
+- Select EUR_EN3.png or USA_EN3.png, depending on the select banner's region.
+- Repeat for every other region you want.
 - Save your changes then exit Ohana3DS.
 
 CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL):
-- Put your border on the romfs folder. Should be named blargSnesBorder.bmp
+- Put your border on the folder you created for the game. It can be named whatever you want, as long as it is a .bmp image file.
 - Go to config folder and select a config template.
-    Mode7: for roms that need hardware assisted mode7 (see compatibility list).
-    Normal: for every other rom.
+    Mode7: activate experimental mode7 filtering.
+    Normal: normal template.
     Borders: sets scaling to 1:1 so you can use a custom border.
     Fullscreen: sets scaling to fullscreen.
-- Copy the config template to romfs.
-Note: You need to use config override if using custom borders, but don't need custom borders to use config override.
+- Copy the config template to the folder you created for the game.
+Note: You need to use the "borders" config template if using custom borders.
 
 UPDATING EXISTING CIAS:
 - Put all of yours cias inside the cia folder (keep a backup of them just in case something goes wrong).
 - Run update.bat.
+- OPTIONAL: If you want to add custom borders or a config template, put them into the folder you created for the game then confirm when prompted to "include or update any extra files".
+- OPTIONAL: If, for some reason, you also want to replace the rom (for a translated one, for example), put it into the folder you created for the game then confirm when prompted to "include or update any extra files".
 
 
 Credits:
