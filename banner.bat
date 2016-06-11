@@ -56,7 +56,7 @@ goto end
 cd /d %~dp0
 
 mkdir "output\%title%\"
-tools\convert input\%title%\label.png -rotate 90 -resize 23x44! output\%title%\label.png
+tools\convert input\%title%\label.png -rotate 270 -resize 23x44! output\%title%\label.png
 tools\convert tools\USA_EN3.png output\%title%\label.png -geometry +122+205 -composite output\%title%\USA_EN3.png
 tools\convert input\%title%\label.png -resize 54x18! output\label.png
 tools\convert tools\EUR_EN3.png output\%title%\label.png -geometry +198+227 -composite output\%title%\EUR_EN3.png
