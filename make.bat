@@ -1,7 +1,7 @@
 @echo off
 echo blargSNES -- Virtual Console Edition
 set /p title=Game Title: 
-if not exist romfs\%title%.smc (
+if not exist "romfs\%title%.smc" (
     echo ERROR: Missing rom file.
     echo Make sure you have a rom.smc file in the romfs folder.
     pause
@@ -12,7 +12,7 @@ set /p serial=Product Code:
 set /p id=Unique Id: 
 set /p region=Region:
 cd romfs
-rename %title%.smc rom.smc
+rename "%title%.smc" rom.smc
 cd ..
 tools\bannertool makesmdh -s "%title%" -l "%title%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin"
 tools\3dstool -c -f banner.bin -t banner --banner-dir banner
@@ -22,7 +22,7 @@ del banner.bin
 del icon.bin
 del romfs\rom.txt
 cd romfs
-rename rom.smc %title%.smc
+rename rom.smc "%title%.smc"
 cd ..
 cd banner
 del banner0.bcmdl
