@@ -1,36 +1,18 @@
 # blargSNES Virtual Console Edition
 
 INSTRUCTIONS:
-<<<<<<< HEAD
 - Put your SNES rom on the romfs folder.
 - Rename it rom.smc.
-=======
--  Put your SNES rom on the romfs folder.
--  Rename it rom.smc.
->>>>>>> 870f7ce81efcb5214da927541fecc01729467fe7
 - Run make.bat.
 - Type in the game's title, publisher, product code (whatever you want) and unique id (whatever you want from 000000 to ffffff).
 - Install the generated CIA file.
 - Enjoy.
-<<<<<<< HEAD
 
 MAKING CUSTOM BANNER AND ICON (OPTIONAL):
 - Put a screenshot of the game on the input folder.
-=======
-
-
-MAKING CUSTOM BANNER AND ICON (OPTIONAL):
--  Put a screenshot of the game on the input folder.
->>>>>>> 870f7ce81efcb5214da927541fecc01729467fe7
 - Rename it banner.png.
 - Put a box art or cartridge label image of the game on the input folder.
 - Rename it label.png.
-- OPTIONAL: If you want your custom banner as much accurate as possible to the oficial VC, search for SCE-PS3-RD-R-LATIN.TTF on google
-<<<<<<< HEAD
-  and put it on the input folder.
-=======
-   and put it on the input folder.
->>>>>>> 870f7ce81efcb5214da927541fecc01729467fe7
 - Run banner.bat.
 - Type in the game's title and release year.
 - OPTIONAL: set the banner text's font size, number of lines and spacing: Leave it blank to use default values.
@@ -60,7 +42,6 @@ MAKING CUSTOM BANNER AND ICON (OPTIONAL):
 - Select the next file and click Import.
 - Select EUR_EN3.png or USA_EN3.png, depending on your 3DS's region.
 - Save your changes then exit Ohana3DS.
-<<<<<<< HEAD
 
 CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL):
 - Put your border on the romfs folder. Should be named blargSnesBorder.bmp
@@ -75,9 +56,6 @@ Note: You need to use config override if using custom borders, but don't need cu
 UPDATING EXISTING CIAS:
 - Put all of yours cias inside the cia folder (keep a backup of them just in case something goes wrong).
 - Run update.bat.
-=======
-- Now follow the instructions on how to build your CIA.
->>>>>>> 870f7ce81efcb5214da927541fecc01729467fe7
 
 
 Credits:
