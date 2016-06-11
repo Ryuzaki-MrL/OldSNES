@@ -20,7 +20,7 @@ MAKING CUSTOM BANNER AND ICON (OPTIONAL):
 - Select the Textures tab then click Open.
 - Navigate to the banner folder and select banner0.bcmdl.
 - Select COMMON1 and click Import.
-- Navigate to the output folder and select COMMON1.png.
+- Navigate to the output folder, then to the game's folder, and select COMMON1.png.
 - Repeat steps 11 and 12 with COMMON1_2 and COMMON1_3, selecting COMMON1_2.png and COMMON1_3.png.
 - Save your changes then click Open again.
 - Navigate to the banner folder again, and select the banner file matching your console's region and language.
@@ -38,7 +38,7 @@ MAKING CUSTOM BANNER AND ICON (OPTIONAL):
     banner12.bcmdl = Spanish ~ USA_SP
     banner13.bcmdl = Portuguese ~ USA_PO
 - Select the first file and click Import.
-- Navigate to the output folder and select USA_EN2.png.
+- Navigate to the output folder, then to the game's folder, and select USA_EN2.png.
 - Select the next file and click Import.
 - Select EUR_EN3.png or USA_EN3.png, depending on the select banner's region.
 - Repeat for every other region you want.
