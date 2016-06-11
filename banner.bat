@@ -13,7 +13,7 @@ echo VIRTUAL CONSOLE INFO STYLE:
 set /p f=Font Size: 
 set /p k=Letter Spacing: 
 set /p ln=Number of Lines: 
-tools\convert input\label.png -rotate 90 -resize 23x44! output\label.png
+tools\convert input\label.png -rotate 270 -resize 23x44! output\label.png
 tools\convert tools\USA_EN3.png output\label.png -geometry +122+205 -composite output\USA_EN3.png
 tools\convert input\label.png -resize 54x18! output\label.png
 tools\convert tools\EUR_EN3.png output\label.png -geometry +198+227 -composite output\EUR_EN3.png
