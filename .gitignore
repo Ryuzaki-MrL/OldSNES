@@ -2,8 +2,9 @@
 CMakeLists.txt
 
 banner
-cia
-romfs
+input
 output
+romfs
 *.exe
 *.xml
+*.cia
