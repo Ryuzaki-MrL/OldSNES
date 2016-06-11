@@ -10,6 +10,7 @@ if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
 set /p author=Publisher: 
 set /p serial=Product Code: 
 set /p id=Unique Id: 
+del /f /q romfs
 if exist "input\%title%\*.smc" (
     copy /b "input\%title%\*.smc" romfs\rom.smc
 ) else (
