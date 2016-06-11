@@ -3,7 +3,7 @@ echo blargSNES -- Virtual Console Edition
 set /p title=Game Title: 
 if not exist romfs\%title%.smc (
     echo ERROR: Missing rom file.
-    echo Make sure you have a rom.smc file on the romfs folder.
+    echo Make sure you have a(n) %title%.smc file in the romfs folder.
     pause
     exit
 )
