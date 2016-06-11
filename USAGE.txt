@@ -44,8 +44,20 @@ MAKING CUSTOM BANNER AND ICON (OPTIONAL):
 18. Select the next file and click Import.
 19. Select EUR_EN3.png or USA_EN3.png, depending on your 3DS's region.
 20. Save your changes then exit Ohana3DS.
-21. Now follow the instructions on how to build your CIA.
 
+CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL):
+1. Put your border on the romfs folder. Should be named blargSnesBorder.bmp
+2. Go to config folder and select a config template.
+   Mode7: for roms that need hardware assisted mode7 (see compatibility list).
+   Normal: for every other rom.
+   Borders: sets scaling to 1:1 so you can use a custom border.
+   Fullscreen: sets scaling to fullscreen.
+3. Copy the config template to romfs.
+Note: You need to use config override if using custom borders, but don't need custom borders to use config override.
+
+UPDATING EXISTING CIAS:
+1. Put all of yours cias inside the cia folder (keep a backup of them just in case something goes wrong).
+2. Run update.bat.
 
 Credits:
 - StapleButter and DiscostewSM for blargSNES.

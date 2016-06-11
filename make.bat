@@ -17,4 +17,4 @@ tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exe
 del banner.bin
 del icon.bin
 del romfs\rom.txt
-echo Done!
+echo Done
