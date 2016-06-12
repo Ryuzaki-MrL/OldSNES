@@ -3,12 +3,13 @@
 INSTRUCTIONS:
 - Create a folder for each game on the input folder (Earthbound, for example).
 - Put your SNES rom on this folder.
+- Put an icon.png on this folder. This can be whatever image you want for the home menu icon (a screenshot, for example).
 - Run make.bat.
 - Type in the game's title, publisher, product code (SNS-P-SMWP, for example) and unique id (whatever you want from 000000 to ffffff).
 - Install the generated CIA file.
 - Enjoy.
 
-MAKING CUSTOM BANNER AND ICON (OPTIONAL):
+CUSTOM BANNER (OPTIONAL):
 - Put a screenshot of the game on the folder you created for the game, and rename it banner.png.
 - OPTIONAL: Put a box art or cartridge label image of the game on the input folder, and rename it label.png.
 - Run banner.bat.
