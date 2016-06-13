@@ -1,5 +1,6 @@
 @echo off
 :begin
+cls
 echo blargSNES -- Virtual Console Edition
 set /p title=Game Title: 
 if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
@@ -7,6 +8,9 @@ if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
     echo Make sure you have a rom file in input\%title% folder.
     pause
     exit
+)
+if not exist output\%title% (
+	MD output\%title%
 )
 set /p author=Publisher: 
 set /p serial=Product Code: 
@@ -22,7 +26,7 @@ if exist "input\%title%\*.ini" copy /b "input\%title%\*.ini" romfs\blargSnes.ini
 if not exist "input\%title%\icon.png" (
     echo ERROR: Icon image not found.
     pause
-    call :exit
+    exit
 )
 tools\convert "input\%title%\icon.png" -resize 42x42! output\tempicon.png
 tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
@@ -37,11 +41,8 @@ del /f /q romfs
 copy /b banner\backup banner
 rmdir /s /q banner\backup
 echo Done
-set /p choice3="Do you want to build another CIA? (Y/N): "  %=%
-if [%choice3%]==[Y] goto begin
-if [%choice3%]==[y] goto begin
-if [%choice3%]==[N] goto exit
-if [%choice3%]==[n] goto exit
-
-:exit
-exit
+Pause
+cls
+choice /C YN /M "Do you want to build another CIA?"
+IF ERRORLEVEL 2 exit
+IF ERRORLEVEL 1 goto begin
