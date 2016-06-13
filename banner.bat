@@ -50,6 +50,7 @@ set lr=6
 if %ln% EQU 2 ( set lt=1
 set lr=20 )
 tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing 6 -interline-spacing %lt% -annotate +44+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
+if exist "input\blargSNES\icon.png" copy /b "input\blargSNES\icon.png" "input\%title%\icon.png"
 goto end
 
 :exportfull
