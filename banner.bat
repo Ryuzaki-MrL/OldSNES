@@ -44,7 +44,7 @@ goto exportdef
 :exportdef
 cd /d %~dp0
 
-mkdir "output\%title%\"
+if not exist "output\%title%" mkdir "output\%title%\"
 set lt=3
 set lr=6
 if %ln% EQU 2 ( set lt=1

@@ -11,9 +11,7 @@ if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
 )
 set long=title
 set /p long=Description: 
-if not exist output\%title% (
-	MD output\%title%
-)
+if not exist "output\%title%" mkdir "output\%title%"
 set /p author=Publisher: 
 set /p serial=Product Code: 
 set /p id=Unique Id: 
@@ -42,8 +40,10 @@ tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exe
 del banner.bin
 del icon.bin
 del /f /q romfs
-copy /b banner\backup banner
-rmdir /s /q banner\backup
+if exist banner\backup (
+    copy /b banner\backup banner
+    rmdir /s /q banner\backup
+)
 echo Done
 Pause
 cls
