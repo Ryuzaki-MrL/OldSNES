@@ -25,18 +25,15 @@ if not exist "input\%title%" (
 echo WARNING: Missing:
 if not exist "input\%title%\label.png" echo   -"%title%\label.png"
 if not exist "input\%title%\banner.png" echo   -"%title%\banner.png"
-set /p choice1="Do you want to use blargSNES' default graphics? (Y/N): " %=%
-if [%choice1%]==[Y] goto defaults
-if [%choice1%]==[y] goto defaults
-if [%choice1%]==[N] goto customname
-if [%choice1%]==[n] goto customname
+choice /C YN /M "Do you want to use blargSNES' default graphics?"
+IF ERRORLEVEL 2 goto customname
+IF ERRORLEVEL 1 goto defaults
+
 
 :customname
-set /p choice2="Do you want to use the data you typed? (Y/N): " %=%
-if [%choice2%]==[Y] goto exportdef
-if [%choice2%]==[y] goto exportdef
-if [%choice2%]==[N] goto exit
-if [%choice2%]==[n] goto exit
+choice /C YN /M "Do you want to use the data you typed?"
+IF ERRORLEVEL 2 goto exit
+IF ERRORLEVEL 1 goto exportdef
 
 :defaults
 set title=blargSNES
@@ -91,20 +88,19 @@ if [%choicerg%]==[] (
 )
 cd ..
 goto end
+Pause
 
 :end
+cls
 cd "tools"
 
-set /p OpenOha="Do you want to open Ohana3DS? (Y/N): "  %=%
-if [%OpenOha%]==[Y] start Ohana3DS.exe
-if [%OpenOha%]==[y] start Ohana3DS.exe
-if [%OpenOha%]==[N] goto exit
-if [%OpenOha%]==[n] goto exit
+choice /C YN /M "Do you want to open Ohana3DS?"
+IF ERRORLEVEL 2 goto exit
+IF ERRORLEVEL 1 start Ohana3DS.exe
 
 :exit
+cls
 cd ..
-set /p choice3="Do you want to restart? (Y/N): "  %=%
-if [%choice3%]==[Y] goto begin
-if [%choice3%]==[y] goto begin
-if [%choice3%]==[N] exit
-if [%choice3%]==[n] exit
+choice /C YN /M "Do you want to restart?"
+IF ERRORLEVEL 2 exit
+IF ERRORLEVEL 1 goto begin
