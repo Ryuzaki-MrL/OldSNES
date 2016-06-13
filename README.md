@@ -18,7 +18,7 @@ CUSTOM BANNER (OPTIONAL):
 - OPTIONAL: Type in the virtual console's title (the title that will be appear on the banner).
 - OPTIONAL: Set the banner text's font size, number of lines and spacing. Leave it blank to use default values.
 - OPTIONAL: Select a region for your banner. Leave it blank if you're going to use two or more.
-- Open Ohana3DS when prompted.
+- Press Y to open Ohana3DS, when prompted.
 - Select the Textures tab then click Open.
 - Navigate to the banner folder and select banner0.bcmdl.
 - Select COMMON1 and click Import.
