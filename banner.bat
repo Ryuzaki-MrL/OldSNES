@@ -89,13 +89,10 @@ goto end
 
 :end
 cls
-cd "tools"
-
 choice /C YN /M "Do you want to open Ohana3DS?"
 IF ERRORLEVEL 2 goto exit
-IF ERRORLEVEL 1 start /w Ohana3DS.exe
+IF ERRORLEVEL 1 start /w tools\Ohana3DS.exe
 
-cd ..
 tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
 if exist banner\backup (
     copy /b banner\backup banner
