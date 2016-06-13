@@ -34,9 +34,9 @@ tools\convert "input\%title%\%file%" -resize 42x42! output\tempicon.png
 tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
 del output\tempicon.png
 tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin"
-tools\3dstool -c -f banner.bin -t banner --banner-dir banner
+if not exist "output\%title%\banner.bin" tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
 echo %title%> romfs\rom.txt
-tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID=0x%id% -DAPP_ROMFS="romfs"
+tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "output\%title%\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID=0x%id% -DAPP_ROMFS="romfs"
 del banner.bin
 del icon.bin
 del /f /q romfs
@@ -45,7 +45,10 @@ if exist banner\backup (
     rmdir /s /q banner\backup
 )
 echo Done
-Pause
+pause
+cls
+choice /C YN /M "Do you want to delete %title%'s output folder?"
+IF ERRORLEVEL 1 rmdir /s /q "output\%title%"
 cls
 choice /C YN /M "Do you want to build another CIA?"
 IF ERRORLEVEL 2 exit

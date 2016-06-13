@@ -57,11 +57,14 @@ cd /d %~dp0
 
 if not exist "input\%title%\banner.png" goto bad
 
-mkdir "output\%title%\"
-if exist "input\%title%\label.png" ( tools\convert "input\%title%\label.png" -rotate 270 -resize 23x44! output\label.png
+if not exist "output\%title%" mkdir "output\%title%\"
+if exist "input\%title%\label.png" (
+tools\convert "input\%title%\label.png" -rotate 270 -resize 23x44! output\label.png
 ) else if exist "input\%title%\label.jpg" tools\convert "input\%title%\label.jpg" -rotate 270 -resize 23x44! output\label.png
 tools\convert tools\USA_EN3.png output\label.png -geometry +122+205 -composite "output\%title%\USA_EN3.png"
+if exist "input\%title%\label.png" (
 tools\convert "input\%title%\label.png" -resize 54x18! output\label.png
+) else if exist "input\%title%\label.jpg" tools\convert "input\%title%\label.jpg" -resize 54x18! output\label.png
 tools\convert tools\EUR_EN3.png "output\label.png" -geometry +198+227 -composite "output\%title%\EUR_EN3.png"
 del output\label.png
 tools\convert "input\%title%\banner.png" -resize 120x102! output\tempbanner.png
@@ -75,10 +78,10 @@ set lt=3
 set lr=6
 if %ln% EQU 2 ( set lt=1
 set lr=20 )
-tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing 6 -interline-spacing %lt% -annotate +44+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
+tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing 6 -interline-spacing %lt% -annotate +45+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
 
 cd "banner"
-mkdir "backup\"
+if not exist "backup\" mkdir "backup\"
 copy banner0.bcmdl backup\banner0.bcmdl
 set /p choicerg="What region are you building for? (1-13): "  %=% 
 if [%choicerg%]==[] (
@@ -96,7 +99,14 @@ cd "tools"
 
 choice /C YN /M "Do you want to open Ohana3DS?"
 IF ERRORLEVEL 2 goto exit
-IF ERRORLEVEL 1 start Ohana3DS.exe
+IF ERRORLEVEL 1 start /w Ohana3DS.exe
+
+cd ..
+tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
+if exist banner\backup (
+    copy /b banner\backup banner
+    rmdir /s /q banner\backup
+)
 
 :exit
 cls
