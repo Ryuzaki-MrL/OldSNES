@@ -61,7 +61,8 @@ cd /d %~dp0
 if not exist "input\%title%\banner.png" goto bad
 
 mkdir "output\%title%\"
-tools\convert "input\%title%\label.png" -rotate 270 -resize 23x44! output\label.png
+if exist "input\%title%\label.png" ( tools\convert "input\%title%\label.png" -rotate 270 -resize 23x44! output\label.png
+) else if exist "input\%title%\label.jpg" tools\convert "input\%title%\label.jpg" -rotate 270 -resize 23x44! output\label.png
 tools\convert tools\USA_EN3.png output\label.png -geometry +122+205 -composite "output\%title%\USA_EN3.png"
 tools\convert "input\%title%\label.png" -resize 54x18! output\label.png
 tools\convert tools\EUR_EN3.png "output\label.png" -geometry +198+227 -composite "output\%title%\EUR_EN3.png"
