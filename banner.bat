@@ -82,16 +82,9 @@ tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.T
 
 cd "banner"
 if not exist "backup\" mkdir "backup\"
-copy banner0.bcmdl backup\banner0.bcmdl
-set /p choicerg="What region are you building for? (1-13): "  %=% 
-if [%choicerg%]==[] (
-    copy ..\banner backup
-) else (
-    copy banner%choicerg%.bcmdl backup\banner%choicerg%.bcmdl
-)
+copy ..\banner backup
 cd ..
 goto end
-Pause
 
 :end
 cls
