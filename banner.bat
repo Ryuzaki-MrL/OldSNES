@@ -104,7 +104,6 @@ if exist banner\backup (
 
 :exit
 cls
-cd ..
 choice /C YN /M "Do you want to restart?"
 IF ERRORLEVEL 2 exit
 IF ERRORLEVEL 1 goto begin
