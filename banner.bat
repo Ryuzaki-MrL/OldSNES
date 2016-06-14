@@ -1,10 +1,10 @@
 @echo off
-set f=14
-set k=1
-set ln=1
 
 :begin
 cls
+set f=14
+set k=1
+set ln=1
 echo GAME INFO:
 set /p title=Game Title: 
 echo VIRTUAL CONSOLE INFO AND INFO STYLE:
