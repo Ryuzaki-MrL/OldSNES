@@ -6,10 +6,10 @@ set f=14
 set k=1
 set ln=1
 echo GAME INFO:
-set /p title=Game Title: 
+set /p "title=Game Title: "
 echo VIRTUAL CONSOLE INFO AND INFO STYLE:
 set vc=%title%
-set /p vc=Virtual Console Title: 
+set /p "vc=Virtual Console Title: "
 set /p release=Release Year: 
 set /p f=Font Size: 
 set /p k=Letter Spacing: 

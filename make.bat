@@ -2,18 +2,18 @@
 :begin
 cls
 echo blargSNES -- Virtual Console Edition
-set /p title=Game Title: 
+set /p "title=Game Title: "
 if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
     echo ERROR: Missing rom file.
     echo Make sure you have a rom file in input\%title% folder.
     pause
     exit
 )
-set long=title
-set /p long=Description: 
+set long=%title%
+set /p "long=Description: "
 if not exist "output\%title%" mkdir "output\%title%"
-set /p author=Publisher: 
-set /p serial=Product Code: 
+set /p "author=Publisher: "
+set /p "serial=Product Code: "
 set /p id=Unique Id: 
 del /f /q romfs
 if exist "input\%title%\*.smc" (
@@ -37,7 +37,6 @@ tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%tit
 if not exist "output\%title%\banner.bin" tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
 echo %title%> romfs\rom.txt
 tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "output\%title%\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID=0x%id% -DAPP_ROMFS="romfs"
-del banner.bin
 del icon.bin
 del /f /q romfs
 if exist banner\backup (
@@ -46,9 +45,6 @@ if exist banner\backup (
 )
 echo Done
 pause
-cls
-choice /C YN /M "Do you want to delete %title%'s output folder?"
-IF ERRORLEVEL 1 rmdir /s /q "output\%title%"
 cls
 choice /C YN /M "Do you want to build another CIA?"
 IF ERRORLEVEL 2 exit
