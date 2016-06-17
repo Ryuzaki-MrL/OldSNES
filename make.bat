@@ -23,13 +23,17 @@ if exist "input\%title%\*.smc" (
 )
 if exist "input\%title%\*.bmp" copy /b "input\%title%\*.bmp" romfs\blargSnesBorder.bmp
 if exist "input\%title%\*.ini" copy /b "input\%title%\*.ini" romfs\blargSnes.ini
-if not exist "input\%title%\icon.png" if not exist "input\%title%\banner.png" (
+if exist "input\%title%\icon.png" ( set file=icon.png
+) else if exist "input\%title%\icon.jpg" ( set file=icon.jpg
+) else if exist "input\%title%\icon.jpeg" ( set file=icon.jpeg
+) else if exist "input\%title%\banner.png" ( set file=banner.png
+) else if exist "input\%title%\banner.jpg" ( set file=banner.jpg
+) else if exist "input\%title%\banner.jpeg" ( set file=banner.jpeg
+) else (
     echo ERROR: Icon image not found.
     pause
     exit
 )
-if exist "input\%title%\icon.png" ( set file=icon.png
-) else if exist "input\%title%\banner.png" set file=banner.png
 tools\convert "input\%title%\%file%" -resize 42x42! output\tempicon.png
 tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
 del output\tempicon.png

@@ -24,9 +24,7 @@ if not exist "input\%title%" (
 )
 
 :bad
-echo WARNING: Missing:
-if not exist "input\%title%\label.png" echo   -"%title%\label.png"
-if not exist "input\%title%\banner.png" echo   -"%title%\banner.png"
+echo ERROR: Missing banner file
 choice /C YN /M "Do you want to use blargSNES' default graphics?"
 IF ERRORLEVEL 2 goto customname
 IF ERRORLEVEL 1 goto defaults
@@ -58,23 +56,27 @@ goto end
 :exportfull
 cd /d %~dp0
 
-if not exist "input\%title%\banner.png" goto bad
+if exist "input\%title%\banner.png" ( set "file1=banner.png"
+) else if exist "input\%title%\banner.jpg" ( set "file1=banner.jpg"
+) else if exist "input\%title%\banner.jpeg" ( set "file1=banner.jpeg"
+) else goto bad
+
+if exist "input\%title%\label.png" ( set "file2=label.png"
+) else if exist "input\%title%\label.jpg" ( set "file2=label.jpg"
+) else set "file2=label.jpeg"
 
 if not exist "output\%title%" mkdir "output\%title%\"
-if exist "input\%title%\label.png" (
-tools\convert "input\%title%\label.png" -rotate 270 -resize 23x44! output\label.png
-) else if exist "input\%title%\label.jpg" tools\convert "input\%title%\label.jpg" -rotate 270 -resize 23x44! output\label.png
+
+tools\convert "input\%title%\%file2%" -rotate 270 -resize 23x44! output\label.png
 tools\convert tools\USA_EN3.png output\label.png -geometry +122+205 -composite "output\%title%\USA_EN3.png"
-if exist "input\%title%\label.png" (
-tools\convert "input\%title%\label.png" -resize 54x18! output\label.png
-) else if exist "input\%title%\label.jpg" tools\convert "input\%title%\label.jpg" -resize 54x18! output\label.png
+tools\convert "input\%title%\%file2%" -resize 54x18! output\label.png
 tools\convert tools\EUR_EN3.png "output\label.png" -geometry +198+227 -composite "output\%title%\EUR_EN3.png"
 del output\label.png
-tools\convert "input\%title%\banner.png" -resize 120x102! output\tempbanner.png
+tools\convert "input\%title%\%file1%" -resize 120x102! output\tempbanner.png
 tools\convert tools\COMMON1.png output\tempbanner.png -geometry +4+6 -composite "output\%title%\common1.png"
-tools\convert "input\%title%\banner.png" -resize 60x51! output\tempbanner.png
+tools\convert "input\%title%\%file1%" -resize 60x51! output\tempbanner.png
 tools\convert tools\COMMON1_2.png output\tempbanner.png -geometry +2+3 -composite "output\%title%\common1_2.png"
-tools\convert "input\%title%\banner.png" -resize 30x26! output\tempbanner.png
+tools\convert "input\%title%\%file1%" -resize 30x26! output\tempbanner.png
 tools\convert tools\COMMON1_3.png output\tempbanner.png -geometry +1+1 -composite "output\%title%\common1_3.png"
 del output\tempbanner.png
 set lt=3
