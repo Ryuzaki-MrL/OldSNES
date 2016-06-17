@@ -4,6 +4,7 @@
 cls
 set f=14
 set k=1
+set w=6
 set ln=1
 echo GAME INFO:
 set /p "title=Game Title: "
@@ -13,6 +14,7 @@ set /p "vc=Virtual Console Title: "
 set /p release=Release Year: 
 set /p f=Font Size: 
 set /p k=Letter Spacing: 
+set /p w=Word Spacing: 
 set /p ln=Number of Lines: 
 
 if not exist "input\%title%" (
@@ -79,7 +81,7 @@ set lt=3
 set lr=6
 if %ln% EQU 2 ( set lt=1
 set lr=20 )
-tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing 6 -interline-spacing %lt% -annotate +45+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
+tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing %w% -interline-spacing %lt% -annotate +45+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interword-spacing 6 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
 
 cd "banner"
 if not exist "backup\" mkdir "backup\"

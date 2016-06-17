@@ -1,5 +1,12 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
+
+set /p quick="Do a quick update? This will update all CIAs without pausing or asking for individual romfs updates (Y/N): " %=% 
+if [!quick!]==[Y] set mode=1
+if [!quick!]==[y] set mode=1
+if [!quick!]==[N] set mode=0
+if [!quick!]==[n] set mode=0
+
 for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     echo Updating %%i...
     tools\ciainfo "%%i"
@@ -16,25 +23,27 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
         del "%%j"
     )
     
-    <romfs\rom.txt set /p title=
+    <romfs\rom.txt set /p "title="
     
-    set /p choice="Do you want to include or update any extra files for !title!? (Y/N): " %=% 
-    if [!choice!]==[Y] (
-        if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
-        if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
-        if exist "input\!title!\*.smc" (
-            copy /b "input\!title!\*.smc" romfs\rom.smc
-        ) else if exist "input\!title!\*.sfc" (
-            copy /b "input\!title!\*.sfc" romfs\rom.smc
+    if !mode! EQU 0 (
+        set /p choice="Do you want to include or update any extra files for !title!? (Y/N): " %=% 
+        if [!choice!]==[Y] (
+            if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
+            if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
+            if exist "input\!title!\*.smc" (
+                copy /b "input\!title!\*.smc" romfs\rom.smc
+            ) else if exist "input\!title!\*.sfc" (
+                copy /b "input\!title!\*.sfc" romfs\rom.smc
+            )
         )
-    )
-    if [!choice!]==[y] (
-        if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
-        if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
-        if exist "input\!title!\*.smc" (
-            copy /b "input\!title!\*.smc" romfs\rom.smc
-        ) else if exist "input\!title!\*.sfc" (
-            copy /b "input\!title!\*.sfc" romfs\rom.smc
+        if [!choice!]==[y] (
+            if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
+            if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
+            if exist "input\!title!\*.smc" (
+                copy /b "input\!title!\*.smc" romfs\rom.smc
+            ) else if exist "input\!title!\*.sfc" (
+                copy /b "input\!title!\*.sfc" romfs\rom.smc
+            )
         )
     )
     
@@ -42,5 +51,6 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     rmdir /s /q exefs
     del /f /q romfs
     echo Done
+    if !mode! EQU 0 pause
 )
 echo All CIAs were updated
