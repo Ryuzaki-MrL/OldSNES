@@ -16,8 +16,7 @@ CUSTOM BANNER (OPTIONAL):
 - Run banner.bat.
 - Type in the game's title and release year.
 - OPTIONAL: Type in the virtual console's title (the title that will be appear on the banner).
-- OPTIONAL: Set the banner text's font size, number of lines and spacing. Leave it blank to use default values.
-- OPTIONAL: Select a region for your banner. Leave it blank if you're going to use two or more.
+- OPTIONAL: Set the banner text's font size, number of lines, letter spacing, and word spacing. Leave it blank to use default values.
 - Press Y to open Ohana3DS, when prompted.
 - Select the Textures tab then click Open.
 - Navigate to the banner folder and select banner0.bcmdl.
@@ -42,8 +41,8 @@ CUSTOM BANNER (OPTIONAL):
 - Select the first file and click Import.
 - Navigate to the output folder, then to the game's folder, and select USA_EN2.png.
 - Select the next file and click Import.
-- Select EUR_EN3.png or USA_EN3.png, depending on the select banner's region.
-- Repeat for every other region you want.
+- Select EUR_EN3.png or USA_EN3.png, depending on the selected banner's region.
+- Repeat for every other region if you want.
 - Save your changes then exit Ohana3DS.
 
 CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL):
