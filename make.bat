@@ -34,7 +34,7 @@ if exist "input\%title%\icon.png" ( set file=icon.png
     pause
     exit
 )
-tools\convert "input\%title%\%file%" -resize 42x42! output\tempicon.png
+tools\convert "input\%title%\%file%" -resize 40x40! output\tempicon.png
 tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
 del output\tempicon.png
 tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin"
