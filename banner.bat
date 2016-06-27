@@ -18,9 +18,9 @@ set /p w=Word Spacing:
 set /p ln=Number of Lines: 
 
 if not exist "input\%title%" (
-		CALL :bad
+        CALL :bad
 ) else (
-		call :exportfull
+        call :exportfull
 )
 
 :bad
@@ -93,17 +93,27 @@ goto end
 
 :end
 cls
+if exist autobanner.py (
+    python --version 2>NUL
+    if errorlevel 0 goto autobanner
+    if errorlevel 1 echo ERROR: Python not found. Couldn't generate banner automatically.
+)
+
 choice /C YN /M "Do you want to open Ohana3DS?"
 IF ERRORLEVEL 2 goto exit
 IF ERRORLEVEL 1 start /w tools\Ohana3DS.exe
 
 tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
+goto exit
+
+:autobanner
+py autobanner.py "%title%"
+
+:exit
 if exist banner\backup (
     copy /b banner\backup banner
     rmdir /s /q banner\backup
 )
-
-:exit
 cls
 choice /C YN /M "Do you want to restart?"
 IF ERRORLEVEL 2 exit
