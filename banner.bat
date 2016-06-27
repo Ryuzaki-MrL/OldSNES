@@ -50,7 +50,7 @@ set lr=6
 if %ln% EQU 2 ( set lt=1
 set lr=20 )
 tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.TTF -pointsize %f% -kerning %k% -fill #1e1e1e -interword-spacing 6 -interline-spacing %lt% -annotate +44+0 "%vc%\n" -pointsize 14 -kerning 1.5 -interline-spacing %lr% -annotate +46+0 "\nReleased: %release%" "output\%title%\USA_EN2.png"
-if exist "input\blargSNES\icon.png" copy /b "input\blargSNES\icon.png" "input\%title%\icon.png"
+if exist "input\blargSNES\icon.png" copy /b "input\blargSNES\icon.png" "input\%title%\icon.png" >NUL 2>NUL
 goto end
 
 :exportfull
@@ -87,7 +87,7 @@ tools\convert tools\USA_EN2.png -gravity center -font input\SCE-PS3-RD-R-LATIN.T
 
 cd "banner"
 if not exist "backup\" mkdir "backup\"
-copy ..\banner backup
+copy ..\banner backup >NUL 2>NUL
 cd ..
 goto end
 
@@ -103,7 +103,7 @@ choice /C YN /M "Do you want to open Ohana3DS?"
 IF ERRORLEVEL 2 goto exit
 IF ERRORLEVEL 1 start /w tools\Ohana3DS.exe
 
-tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
+tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner >NUL 2>NUL
 goto exit
 
 :autobanner
@@ -111,7 +111,7 @@ py autobanner.py "%title%"
 
 :exit
 if exist banner\backup (
-    copy /b banner\backup banner
+    copy /b banner\backup banner >NUL 2>NUL
     rmdir /s /q banner\backup
 )
 cls
