@@ -5,6 +5,8 @@ banner
 input
 output
 romfs
+AutoBanner.py
+*.txt
 *.exe
 *.xml
 *.cia
