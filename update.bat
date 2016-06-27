@@ -9,13 +9,6 @@ if [!quick!]==[n] set mode=0
 
 for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     echo Updating %%i...
-    tools\ciainfo "%%i"
-
-    <info.txt (
-        set /p "id="
-        set /p "serial="
-    )
-    del info.txt
     
     tools\ctrtool -x -t cia --contents ncch "%%i"
     for /f "delims=" %%j in ('dir /b /s "ncch*.*"') do (
@@ -23,7 +16,18 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
         del "%%j"
     )
     
-    <romfs\rom.txt set /p "title="
+    tools\ciainfo "%%i"
+
+    <info.txt (
+        set /p "id="
+        set /p "serial="
+        set /p "title="
+        set /p "long="
+        set /p "author="
+    )
+    del info.txt
+    
+    REM :: <romfs\rom.txt set /p "title="
     
     if !mode! EQU 0 (
         set /p choice="Do you want to include or update any extra files for !title!? (Y/N): " %=% 
@@ -45,8 +49,16 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
                 copy /b "input\!title!\*.sfc" romfs\rom.smc
             )
         )
+        echo Change long title and author [OPTIONAL]
+        set /p long="Description: "
+        set /p author="Author: "
     )
     
+    tools\convert "input\!title!\banner.png" -resize "40x40^!" output\tempicon.png
+    tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\!title!\icon.png"
+    del output\tempicon.png
+    
+    tools\bannertool makesmdh -s "!title!" -l "!long!" -p "!author!" -i "output\!title!\icon.png" -o "exefs\icon.bin"
     tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "%%i" -exefslogo -icon "exefs\icon.bin" -banner "exefs\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="!title!" -DAPP_PRODUCT_CODE="!serial!" -DAPP_UNIQUE_ID=0x!id! -DAPP_ROMFS="romfs"
     rmdir /s /q exefs
     del /f /q romfs
