@@ -31,8 +31,6 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     )
     del info.txt
     
-    REM :: <romfs\rom.txt set /p "title="
-    
     if !mode! EQU 0 (
         set /p choice="Do you want to include or update any extra files for !title!? (Y/N): " %=% 
         if [!choice!]==[Y] (
@@ -58,11 +56,21 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
         set /p author="Author: "
     )
     
-    tools\convert "input\!title!\banner.png" -resize "40x40^!" output\tempicon.png
-    tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\!title!\icon.png"
-    del output\tempicon.png
+    if exist "input\!title!\icon.png" ( set "file=input\!title!\icon.png"
+    ) else if exist "input\!title!\icon.jpg" ( set "file=input\!title!\icon.jpg"
+    ) else if exist "input\!title!\icon.jpeg" ( set "file=input\!title!\icon.jpeg"
+    ) else if exist "input\!title!\banner.png" ( set "file=input\!title!\banner.png"
+    ) else if exist "input\!title!\banner.jpg" ( set "file=input\!title!\banner.jpg"
+    ) else if exist "input\!title!\banner.jpeg" ( set "file=input\!title!\banner.jpeg"
+    ) else set file=":none"
     
-    tools\bannertool makesmdh -s "!title!" -l "!long!" -p "!author!" -i "output\!title!\icon.png" -o "exefs\icon.bin" >NUL 2>NUL
+    if exist "!file!" (
+        tools\convert "!file!" -resize "40x40^!" output\tempicon.png
+        tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\!title!\icon.png"
+        del output\tempicon.png
+        tools\bannertool makesmdh -s "!title!" -l "!long!" -p "!author!" -i "output\!title!\icon.png" -o "exefs\icon.bin" >NUL 2>NUL
+    )
+    
     tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "%%i" -exefslogo -icon "exefs\icon.bin" -banner "exefs\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="!title!" -DAPP_PRODUCT_CODE="!serial!" -DAPP_UNIQUE_ID=0x!id! -DAPP_ROMFS="romfs" >NUL 2>NUL
     rmdir /s /q exefs
     del /f /q romfs
