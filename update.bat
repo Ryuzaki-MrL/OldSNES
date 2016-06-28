@@ -1,11 +1,9 @@
 @echo off
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-set /p quick="Do a quick update? This will update all CIAs without pausing or asking for individual romfs updates (Y/N): " %=% 
-if [!quick!]==[Y] set mode=1
-if [!quick!]==[y] set mode=1
-if [!quick!]==[N] set mode=0
-if [!quick!]==[n] set mode=0
+choice /C YN /M "Do a quick update? This will update all CIAs without pausing or asking for individual romfs updates."
+if errorlevel 1 set mode=1
+if errorlevel 2 set mode=0
 
 set n=0
 
@@ -32,28 +30,19 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     del info.txt
     
     if !mode! EQU 0 (
-        set /p choice="Do you want to include or update any extra files for !title!? (Y/N): " %=% 
-        if [!choice!]==[Y] (
-            if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
-            if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
+        choice /C YN /M "Do you want to include or update any extra files for !title!?"
+        IF errorlevel 1 (
+            if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp >NUL 2>NUL
+            if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini >NUL 2>NUL
             if exist "input\!title!\*.smc" (
-                copy /b "input\!title!\*.smc" romfs\rom.smc
+                copy /b "input\!title!\*.smc" romfs\rom.smc >NUL 2>NUL
             ) else if exist "input\!title!\*.sfc" (
-                copy /b "input\!title!\*.sfc" romfs\rom.smc
-            )
-        )
-        if [!choice!]==[y] (
-            if exist "input\!title!\*.bmp" copy /b "input\!title!\*.bmp" romfs\blargSnesBorder.bmp
-            if exist "input\!title!\*.ini" copy /b "input\!title!\*.ini" romfs\blargSnes.ini
-            if exist "input\!title!\*.smc" (
-                copy /b "input\!title!\*.smc" romfs\rom.smc
-            ) else if exist "input\!title!\*.sfc" (
-                copy /b "input\!title!\*.sfc" romfs\rom.smc
+                copy /b "input\!title!\*.sfc" romfs\rom.smc >NUL 2>NUL
             )
         )
         echo Change long title and author [OPTIONAL]
-        set /p long="Description: "
-        set /p author="Author: "
+        set /p "long=Description: "
+        set /p "author=Author: "
     )
     
     if exist "input\!title!\icon.png" ( set "file=input\!title!\icon.png"
@@ -77,4 +66,5 @@ for /f "delims=" %%i in ('dir /b /s "*.cia"') do (
     set /a n+=1
     if !mode! EQU 0 pause
 )
-echo All CIAs were updated
+echo Done
+pause
