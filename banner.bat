@@ -107,7 +107,7 @@ tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner >N
 goto exit
 
 :autobanner
-py tools\autobanner.py "%title%"
+tools\autobanner.py "%title%"
 
 :exit
 if exist banner\backup (
