@@ -94,7 +94,7 @@ goto end
 :end
 cls
 if exist tools\autobanner.py (
-    python --version 2>NUL
+    python --version >NUL 2>NUL
     if errorlevel 0 goto autobanner
     if errorlevel 1 echo ERROR: Python not found. Couldn't generate banner automatically.
 )
