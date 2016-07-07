@@ -93,21 +93,8 @@ goto end
 
 :end
 cls
-if exist tools\autobanner.py (
-    python --version >NUL 2>NUL
-    if errorlevel 0 goto autobanner
-    if errorlevel 1 echo ERROR: Python not found. Couldn't generate banner automatically.
-)
-
-choice /C YN /M "Do you want to open Ohana3DS?"
-IF ERRORLEVEL 2 goto exit
-IF ERRORLEVEL 1 start /w tools\Ohana3DS.exe
-
+tools\autobanner "%title%"
 tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner >NUL 2>NUL
-goto exit
-
-:autobanner
-tools\autobanner.py "%title%"
 
 :exit
 if exist banner\backup (
