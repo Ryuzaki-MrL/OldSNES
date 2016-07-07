@@ -11,10 +11,11 @@ if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
 )
 set long=%title%
 set /p "long=Description: "
-if not exist "output\%title%" mkdir "output\%title%"
 set /p "author=Publisher: "
 set /p "serial=Product Code: "
-set /p id=Unique Id: 
+set /p "id=Unique Id: "
+if not exist "output\%title%" mkdir "output\%title%"
+if not exist romfs mkdir romfs
 del /f /q romfs
 if exist "input\%title%\*.smc" (
     copy /b "input\%title%\*.smc" romfs\rom.smc >NUL 2>NUL
@@ -40,6 +41,7 @@ del output\tempicon.png
 tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin" >NUL 2>NUL
 if not exist "output\%title%\banner.bin" tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
 (echo %title%)>romfs\rom.txt
+if not exist cia mkdir cia
 tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "output\%title%\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID="0x%id%" -DAPP_ROMFS="romfs" >NUL 2>NUL
 del icon.bin
 del /f /q romfs
