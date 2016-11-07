@@ -35,7 +35,7 @@ Note: You need to use the "borders" config template if using custom borders.
 
 UPDATING EXISTING CIAS:
 - Put all of yours cias inside the cia folder (keep a backup of them just in case something goes wrong).
-- Run update.bat.
+- Run update_blarg.bat for blargSNES and update_snes9x.bat for Snes9x.
 - OPTIONAL: If you want to add or replace files, put them into the folder you created for the game, then confirm when prompted to "include or update any extra files".
 - OPTIONAL: If you want to delete existing files, go to the romfs folder and delete whichever file(s) you want. DO NOT DELETE ROM.SMC.
 
