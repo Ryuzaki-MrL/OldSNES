@@ -1,7 +1,8 @@
 @echo off
 :begin
 cls
-echo blargSNES -- Virtual Console Edition
+echo OldSNES -- SNES VC for Old 3DS users
+echo Currently using: BlargSNES
 set /p "title=Game Title: "
 if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
     echo ERROR: Missing rom file.

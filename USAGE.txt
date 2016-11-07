@@ -1,10 +1,10 @@
-# blargSNES Virtual Console Edition
+# OldSNES: SNES VC for Old 3DS users
 
 INSTRUCTIONS:
 - Create a folder for each game on the input folder (Earthbound, for example).
 - Put your SNES rom on this folder.
 - Put an icon image on this folder and rename it icon.png or icon.jpg. This can be whatever image you want for the home menu icon (a screenshot, for example).
-- Run make.bat.
+- Run make_blarg.bat for blargSNES and make_snes9x.bat for Snes9x.
 - Type in the game's title, description (optional), publisher, product code (SNS-MW-USA, for example), and unique id (whatever you want from 00000 to fffff).
 - Install the generated CIA file.
 - Enjoy.
@@ -21,7 +21,7 @@ CUSTOM BANNER (OPTIONAL):
 - OPTIONAL: Set the banner text's font size, number of lines, letter spacing and word spacing. Leave it blank to use default values.
 - Press Enter then DO NOT touch anything, just wait until it's done.
 
-CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL):
+CUSTOM BORDERS AND CONFIG OVERRIDE (OPTIONAL, BLARGSNES ONLY):
 - Put your border on the folder you created for the game. It can be named whatever you want, as long as it is a .bmp image file.
 - Go to config folder and select a config template.
   - Mode7: activate Mode 7 filtering.
@@ -42,4 +42,5 @@ UPDATING EXISTING CIAS:
 
 Credits:
 - StapleButter and DiscostewSM for blargSNES.
+- bubble2k16 for Snes9x 3DS.
 - Asia81 for the SNES VC banner template.
