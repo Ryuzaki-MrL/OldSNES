@@ -13,6 +13,7 @@ Note: If you don't provide an icon image, banner.png/banner.jpg will be used for
 
 
 CUSTOM BANNER (OPTIONAL):
+- Before you begin make sure your screen resolution is 1366x768, otherwise the automatic banner generation will not work.
 - Put a screenshot of the game on the folder you created for the game, and rename it banner.png or banner.jpg.
 - OPTIONAL: Put a box art or cartridge label image of the game on the folder you created for the game, and rename it label.png or label.jpg.
 - Run banner.bat.
