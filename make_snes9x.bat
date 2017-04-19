@@ -2,7 +2,7 @@
 :begin
 cls
 echo OldSNES -- SNES VC for Old 3DS users
-echo Currently using: Snes9x for 3DS
+echo Currently using: Snes9x
 set /p "title=Game Title: "
 if not exist "input\%title%\*.smc" if not exist "input\%title%\*.sfc" (
     echo ERROR: Missing rom file.
@@ -23,10 +23,13 @@ if exist "input\%title%\*.smc" (
 ) else (
     copy /b "input\%title%\*.sfc" romfs\rom.smc >NUL 2>NUL
 )
-if exist "input\%title%\*.cfg" copy /b "input\%title%\*.cfg" romfs\rom.cfg >NUL 2>NUL
+if exist "input\%title%\*.bmp" copy /b "input\%title%\*.bmp" romfs\blargSnesBorder.bmp >NUL 2>NUL
+if exist "input\%title%\*.ini" copy /b "input\%title%\*.ini" romfs\blargSnes.ini >NUL 2>NUL
 if exist "input\%title%\icon.png" ( set file=icon.png
+) else if exist "input\%title%\icon.bin" ( set file=icon.bin
 ) else if exist "input\%title%\icon.jpg" ( set file=icon.jpg
 ) else if exist "input\%title%\icon.jpeg" ( set file=icon.jpeg
+) else if exist "input\%title%\banner.bin" ( set file=banner.bin
 ) else if exist "input\%title%\banner.png" ( set file=banner.png
 ) else if exist "input\%title%\banner.jpg" ( set file=banner.jpg
 ) else if exist "input\%title%\banner.jpeg" ( set file=banner.jpeg
@@ -35,15 +38,26 @@ if exist "input\%title%\icon.png" ( set file=icon.png
     pause
     exit
 )
-tools\convert "input\%title%\%file%" -resize 40x40! output\tempicon.png
-tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
-del output\tempicon.png
-tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin" >NUL 2>NUL
-if not exist "output\%title%\banner.bin" tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
+
+if "%file%"=="icon.bin" set useBin=T
+if "%file%"=="banner.bin" set useBin=T
+
+if not "%useBin%"=="T" (
+	tools\convert "input\%title%\%file%" -resize 40x40! output\tempicon.png
+	tools\convert tools\icon.png output\tempicon.png -gravity center -composite "output\%title%\icon.png"
+	del output\tempicon.png
+	tools\bannertool makesmdh -s "%title%" -l "%long%" -p "%author%" -i "output\%title%\icon.png" -o "icon.bin" >NUL 2>NUL
+	if not exist "output\%title%\banner.bin" tools\3dstool -c -f "output\%title%\banner.bin" -t banner --banner-dir banner
+)
+
 (echo %title%)>romfs\rom.txt
 if not exist cia mkdir cia
-tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "output\%title%\banner.bin" -elf "tools\snes9x_3ds.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID="0x%id%" -DAPP_ROMFS="romfs" >NUL 2>NUL
-del icon.bin
+if "%useBin%"=="T" (
+	tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "input\%title%\icon.bin" -banner "input\%title%\banner.bin" -elf "tools\blargSnes.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID="0x%id%" -DAPP_ROMFS="romfs"
+) else (	
+	tools\makerom -f cia -target t -rsf "tools\custom.rsf" -o "cia\%title%.cia" -exefslogo -icon "icon.bin" -banner "output\%title%\banner.bin" -elf "tools\snes9x_3ds.elf" -DAPP_TITLE="%title%" -DAPP_PRODUCT_CODE="%serial%" -DAPP_UNIQUE_ID="0x%id%" -DAPP_ROMFS="romfs" >NUL 2>NUL
+	del icon.bin
+)
 del /f /q romfs
 if exist banner\backup (
     copy /b banner\backup banner >NUL 2>NUL
